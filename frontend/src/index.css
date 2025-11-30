@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RTL Support */
+[dir='rtl'] {
+  direction: rtl;
+}
+
+[dir='ltr'] {
+  direction: ltr;
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-warm-50 text-gray-900 font-sans antialiased;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold;
+  }
+  
+  h1 {
+    @apply text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl lg:text-3xl;
+  }
+  
+  h4 {
+    @apply text-xl lg:text-2xl;
+  }
+  
+  h5 {
+    @apply text-lg lg:text-xl;
+  }
+  
+  h6 {
+    @apply text-base lg:text-lg;
+  }
+}
+
+@layer utilities {
+  /* Scrollbar styling */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+  
+  /* Focus visible */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+  
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply bg-gray-200 animate-shimmer;
+    background: linear-gradient(
+      90deg,
+      #f3f4f6 0px,
+      #e5e7eb 40px,
+      #f3f4f6 80px
+    );
+    background-size: 1000px 100%;
+  }
+
+  /* Gradient with constant center and fading edges */
+  .gradient-center-fade {
+    background: linear-gradient(
+      to right,
+      rgba(45, 95, 79, 0.3) 0%,
+      rgba(58, 127, 107, 0.5) 15%,
+      rgba(74, 155, 127, 0.8) 30%,
+      rgba(74, 155, 127, 1) 40%,
+      rgba(74, 155, 127, 1) 60%,
+      rgba(74, 155, 127, 0.8) 70%,
+      rgba(58, 127, 107, 0.5) 85%,
+      rgba(45, 95, 79, 0.3) 100%
+    );
+  }
+
+  /* Footer gradient with constant center */
+  .gradient-footer {
+    background: linear-gradient(
+      to right,
+      rgba(45, 95, 79, 0.4) 0%,
+      rgba(58, 127, 107, 0.6) 10%,
+      rgba(74, 155, 127, 0.9) 20%,
+      rgba(74, 155, 127, 1) 30%,
+      rgba(74, 155, 127, 1) 50%,
+      rgba(193, 105, 79, 1) 50%,
+      rgba(193, 105, 79, 1) 70%,
+      rgba(193, 105, 79, 0.9) 80%,
+      rgba(193, 105, 79, 0.6) 90%,
+      rgba(193, 105, 79, 0.4) 100%
+    );
+  }
+}
+
+/* Toast animation */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+

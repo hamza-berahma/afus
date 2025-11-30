@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Afus ⴰⴼⵓⵙ",
+    "slug": "sou9na-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sou9na.mobile",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to your camera to scan QR codes for delivery confirmation.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to upload product images.",
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show nearby cooperatives on the map."
+      }
+    },
+    "android": {
+      "package": "com.sou9na.mobile",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {},
+    "extra": {
+      "apiBaseUrl": "http://localhost:5000/api"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}

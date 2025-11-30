@@ -1,0 +1,1417 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wallet Management KIT</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2ba85dd4-d74e-8198-beab-efdc403f5654" class="page sans"><header><img class="page-cover-image" src="fond_visuel_UHT.png" style="object-position:center 44.879999999999995%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="logo_cih.png"/></div><h1 class="page-title">Wallet Management KIT</h1><p class="page-description"></p></header><div class="page-body"><p id="2ba85dd4-d74e-81f5-8913-ec938ec25b4a" class=""><strong>Table of contents</strong></p><nav id="2ba85dd4-d74e-81e3-bd12-f74a735be70a" class="block-color-default_background table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8121-9e7d-f16c6ad63d2a">1. Introduction</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81f3-8336-ee27f5460227">2. General information</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8114-baab-e926a4833384">2.1 Format</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8163-9e26-d79927593012">2.2 HTTP codes</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ba85dd4-d74e-812d-8656-c73fe79a3d13">3. Authentication</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ba85dd4-d74e-813b-b24a-d39d7313a1b6">4. List of wallet APIs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81d3-a1c5-e858f829dfd4">4.1 - Creating a wallet</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8195-98a3-c3fef632ce7a">4.2 - Consulting customer information</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81bf-b955-f738ad106abf">4.3 - Consultation of transaction history</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81f3-8c9f-f3bfcaaf2366">4.4 - Balance consultation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-813d-9f5d-e56b472c52c4">4.5 - Cash IN</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81e1-b859-ce960e7b8ce6">4.6 - Cash OUT</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81d7-9664-ff45fe994bc3">4.7 - Wallet to Wallet</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8103-b69d-ca1aef4791f9">4.8 - Transfer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-813d-ab52-cc76aa87134d">4.9 - ATM withdrawal</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8163-961a-dba304678f06">4.10 - Wallet to Merchant transaction</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8166-930a-e81df31bf7a1">4.11 - Creating a Merchant Wallet </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8147-8a1a-f099fcc66735">4.12 - Merchant to Merchant transaction</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81db-a533-cd30d405f340">4.13 - Dynamic QR code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-8130-aebc-e7a09fc0a954">4.14 - Merchant to Wallet transaction</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81b7-8b02-dd80e641a2a0">5 - Mock-er an API </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81d5-b3d3-e70229aeac48">5.1 - Mocking directly into the code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81b1-a8d0-f6d1bcb82b01">5.2 - Mocking an API with tools</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2ba85dd4-d74e-81d0-b16c-f9e27f564524">5.3 - Essential rule</a></div></nav><h2 id="2ba85dd4-d74e-8121-9e7d-f16c6ad63d2a" class="">1. Introduction</h2><p id="2ba85dd4-d74e-8161-8053-e6a5d9f6050b" class="">This documentation describes the endpoints made available as part of the Hackathon.</p><p id="2ba85dd4-d74e-812f-9f8c-c62396036a11" class="">The APIs are not accessible in production: participants must mock-er the endpoints and answers.</p><h2 id="2ba85dd4-d74e-81f3-8336-ee27f5460227" class="">2. General information</h2><h3 id="2ba85dd4-d74e-8114-baab-e926a4833384" class="">2.1 Format</h3><ul id="2ba85dd4-d74e-812e-9b38-e8643ef2e05c" class="bulleted-list"><li style="list-style-type:disc">Exchange format: JSON</li></ul><ul id="2ba85dd4-d74e-8102-a014-e5fb85e7bc52" class="bulleted-list"><li style="list-style-type:disc">Encoding: UTF-8</li></ul><ul id="2ba85dd4-d74e-81d9-8499-fcace7e12b62" class="bulleted-list"><li style="list-style-type:disc">Supported methods: GET, POST</li></ul><h3 id="2ba85dd4-d74e-8163-9e26-d79927593012" class="">2.2 HTTP codes</h3><p id="2ba85dd4-d74e-8186-822a-f6dbf43bef39" class="">Wallet management KIT uses standard HTTP response codes to indicate the success or failure of an API request.</p><table id="2ba85dd4-d74e-8179-b627-c899f843b99b" class="simple-table"><thead class="simple-table-header"><tr id="2ba85dd4-d74e-81ce-8425-e96e68baf949"><th id="];_V" class="simple-table-header-color simple-table-header">Code</th><th id="GUIT" class="simple-table-header-color simple-table-header">Meaning</th></tr></thead><tbody><tr id="2ba85dd4-d74e-812c-afcf-eeae152cbeca"><td id="];_V" class="">200</td><td id="GUIT" class="">Success</td></tr><tr id="2ba85dd4-d74e-81c4-ab48-daae0439cec4"><td id="];_V" class="">201</td><td id="GUIT" class="">Created</td></tr><tr id="2ba85dd4-d74e-8160-9dec-e1e9acda9377"><td id="];_V" class="">400</td><td id="GUIT" class="">Invalid request</td></tr><tr id="2ba85dd4-d74e-8164-a58c-fc61199bc3d6"><td id="];_V" class="">404</td><td id="GUIT" class="">Not found</td></tr><tr id="2ba85dd4-d74e-81cd-bc3e-dd523af729b1"><td id="];_V" class="">500</td><td id="GUIT" class="">Fictitious server error</td></tr></tbody></table><h2 id="2ba85dd4-d74e-812d-8656-c73fe79a3d13" class="">3. Authentication</h2><p id="2ba85dd4-d74e-8108-bf71-eddb130b7d1c" class="">No real authentication is used in the hackathon.</p><p id="2ba85dd4-d74e-8114-a8e2-eee6e3c53b26" class="">Participants must mock-enter calls without a token.</p><h2 id="2ba85dd4-d74e-813b-b24a-d39d7313a1b6" class="">4. List of wallet APIs</h2><p id="2ba85dd4-d74e-8108-84d1-f2faae6efa5e" class="">Wallet services provide a full range of functionality for managing electronic wallets. These services include :</p><ul id="2ba85dd4-d74e-81ad-96b2-d7107d130844" class="bulleted-list"><li style="list-style-type:disc">Wallet creation (customer / merchant) </li></ul><ul id="2ba85dd4-d74e-8163-a517-c5697d79db52" class="bulleted-list"><li style="list-style-type:disc">Consultation of customer information</li></ul><ul id="2ba85dd4-d74e-8180-97e5-d48aa94648e0" class="bulleted-list"><li style="list-style-type:disc">Consultation of transaction history</li></ul><ul id="2ba85dd4-d74e-81e0-a6c6-e8d7fcb6ed41" class="bulleted-list"><li style="list-style-type:disc">Consultation of balance</li></ul><ul id="2ba85dd4-d74e-81fb-9dff-e5e298091c2d" class="bulleted-list"><li style="list-style-type:disc">Cash IN / Cash OUT</li></ul><ul id="2ba85dd4-d74e-8110-b79e-ee9ac0bc695c" class="bulleted-list"><li style="list-style-type:disc">Wallet to Wallet transaction</li></ul><ul id="2ba85dd4-d74e-8187-8904-fdb3fd9e6a23" class="bulleted-list"><li style="list-style-type:disc">Merchant payment</li></ul><ul id="2ba85dd4-d74e-8186-85b6-e66bb20b992d" class="bulleted-list"><li style="list-style-type:disc">QR code generation to initiate payment</li></ul><ul id="2ba85dd4-d74e-81f1-83b3-fd17050c8f0a" class="bulleted-list"><li style="list-style-type:disc">Bank transfer</li></ul><ul id="2ba85dd4-d74e-811c-af9c-d2e1b1724203" class="bulleted-list"><li style="list-style-type:disc">ATM withdrawal</li></ul><hr id="2ba85dd4-d74e-810e-ba32-d579586d50c1"/><h3 id="2ba85dd4-d74e-81d3-a1c5-e858f829dfd4" class="">4.1 - Creating a wallet</h3><p id="2ba85dd4-d74e-81f2-b3bf-df6b016eafdb" class="">Wallet creation is a two-step process, to ensure security and verify the customer&#x27;s identity:</p><ul id="2ba85dd4-d74e-8141-8234-f6d501fdfd8d" class="bulleted-list"><li style="list-style-type:disc">Pre-subscription (enter customer details).</li></ul><ul id="2ba85dd4-d74e-8120-9854-dc43b11fe8ac" class="bulleted-list"><li style="list-style-type:disc">Activation (identity verification by OTP).</li></ul><p id="2ba85dd4-d74e-813a-a1a0-c228b948eba2" class="">
+</p><figure id="2ba85dd4-d74e-8145-80ce-d3911e302860" class="image"><a href="creation_wallet.png"><img style="width:432px" src="creation_wallet.png"/></a><figcaption>                                  Wallet creation</figcaption></figure><p id="2ba85dd4-d74e-8156-b9d4-ecab90eed18e" class=""><strong>4.1.1 - Wallet pre-registration</strong></p><p id="2ba85dd4-d74e-8138-8c50-fa11e05723db" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81d7-ab15-ec01bfa523f1" class="">Pre-subscribe a customer wallet (enter customer information).</p><p id="2ba85dd4-d74e-8186-a94f-c6d2c83b0b8f" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8188-846a-f7ba6023cd4e" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet
+
+</code></pre><p id="2ba85dd4-d74e-8182-959d-fdfb25fc927b" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-812a-9347-cf3eda98e938" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">state=precreate</code></pre><p id="2ba85dd4-d74e-819d-81c3-db122c406cc3" class="">
+</p><p id="2ba85dd4-d74e-813c-88df-e1b7fdcc6a90" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8163-a460-f46da766b635" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot; 212700446631&quot;, 
+&quot;phoneOperator&quot;: &quot;IAM&quot;, 
+&quot;clientFirstName&quot;: &quot;&quot;, 
+&quot;clientLastName&quot;: &quot;&quot;,
+&quot;email&quot;: &quot;&quot;,
+&quot;placeOfBirth&quot;: &quot;&quot;,
+&quot;dateOfBirth&quot;: &quot;&quot;,
+&quot;clientAddress&quot;: &quot;&quot;,
+&quot;gender&quot;: &quot;&quot;,
+&quot;legalType&quot;: &quot;&quot;,
+&quot;legalId&quot;: &quot;&quot;
+}
+</code></pre><p id="2ba85dd4-d74e-8191-bd19-c5b58bac1d65" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8170-893b-e8cc0f78c3e3" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: { 
+&quot;activityArea&quot;: null, 
+&quot;addressLine1&quot;: &quot;&quot;, 
+&quot;addressLine2&quot;: null, 
+&quot;addressLine3&quot;: null, 
+&quot;addressLine4&quot;: null, 
+&quot;agenceId&quot;: &quot;211&quot;, 
+&quot;averageIncome&quot;: null, 
+&quot;birthDay&quot;: null, 
+&quot;channelId&quot;: &quot;P&quot;, 
+&quot;city&quot;: null,
+&quot;country&quot;: null,
+&quot;dateOfBirth&quot;: &quot;&quot;, 
+&quot;distributeurId&quot;: &quot;000104&quot;, 
+&quot;documentExpiryDate1&quot;: null, 
+&quot;documentExpiryDate2&quot;: null, 
+&quot;documentScan1&quot;: &quot;&quot;,
+&quot;documentScan2&quot;: &quot;&quot;,
+&quot;documentType1&quot;: &quot;&quot;, 
+&quot;documentType2&quot;: null, 
+&quot;email&quot;: &quot;&quot;, 
+&quot;familyStatus&quot;: null, 
+&quot;firstName&quot;: &quot;Prenom&quot;, 
+&quot;fonction&quot;: null, 
+&quot;gender&quot;: &quot;&quot;, 
+&quot;institutionId&quot;: &quot;0001&quot;, 
+&quot;landLineNumber&quot;: null, 
+&quot;lastName&quot;: &quot;nom&quot;,
+&quot;legalId1&quot;: &quot;&quot;, 
+&quot;legalId2&quot;: null, 
+&quot;level&quot;: null, 
+&quot;mailaddress&quot;: null,
+&quot;mobileNumber&quot;: &quot;212700446631&quot;, 
+&quot;nationalite&quot;: null, 
+&quot;numberofchildren&quot;: null, 
+&quot;optField1&quot;: null,
+&quot;optField2&quot;: null, 
+&quot;otp&quot;: &quot;123456&quot;, 
+&quot;phoneNumber&quot;: null, 
+&quot;placeOfBirth&quot;: &quot;&quot;, 
+&quot;postCode&quot;: null, 
+&quot;productId&quot;: &quot;000&quot;,
+&quot;productTypeId&quot;: &quot;000&quot;, 
+&quot;profession&quot;: null, 
+&quot;provider&quot;: &quot;INWI&quot;, 
+&quot;raisonSocial&quot;: null, 
+&quot;region&quot;: null, 
+&quot;registrationDate&quot;: null, 
+&quot;title&quot;: null,
+&quot;token&quot;: &quot;TR2404781353895901&quot;
+}
+}
+</code></pre><p id="2ba85dd4-d74e-813f-bb50-d89e7f472e74" class=""><strong>4.1.2 - Wallet activation</strong></p><p id="2ba85dd4-d74e-810a-a2b4-da15d063a508" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8151-bfd6-f812d52fac8c" class="">Activate a customer wallet</p><p id="2ba85dd4-d74e-816c-a528-e513967697d9" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-814c-af9f-c4ebbf4baf9a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet
+
+</code></pre><p id="2ba85dd4-d74e-8136-87fc-f3ff02264e4e" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-816c-b403-f23776bcb4a7" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">state=activate</code></pre><p id="2ba85dd4-d74e-8157-8830-f7d0bc1fc6e4" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-817d-83fc-c24526a28cee" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;otp&quot;: &quot;123456&quot;, //otp reçu /
+&quot;token&quot;: &quot; TR2404781353895901&quot; //Token récupéré du ws de la précréation//
+}</code></pre><p id="2ba85dd4-d74e-81fb-8711-fd62582ed1de" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-812d-83b0-cdceb7a174a9" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: {
+&quot;contractId&quot;: &quot;LAN240478508299911&quot;,
+&quot;reference&quot;: &quot;&quot;,
+&quot;level&quot;: &quot;000&quot;,
+&quot;rib&quot;: &quot;853780241716465970216211&quot;
+}
+}
+</code></pre><h3 id="2ba85dd4-d74e-8195-98a3-c3fef632ce7a" class="">4.2 - Consulting customer information</h3><p id="2ba85dd4-d74e-8178-a6cb-cdca535747d5" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8167-8a2c-cadc36c39187" class="">View a customer&#x27;s profile.</p><p id="2ba85dd4-d74e-8155-8f63-dc699466b40f" class="">Consultation is by phone number and ID.</p><p id="2ba85dd4-d74e-81d6-8504-eaca09392f33" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8168-936e-e913ca88b3d0" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/clientinfo
+
+</code></pre><p id="2ba85dd4-d74e-8186-9445-dd74c896c008" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-813c-807d-e988b764acc2" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8152-af58-dc6d0b2d0bd0" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-810e-8a51-f72a1a432fff" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot;212700446211&quot;, 
+&quot;identificationType&quot;: &quot;CIN&quot;, 
+&quot;identificationNumber&quot;: &quot;BK12232&quot;
+}</code></pre><p id="2ba85dd4-d74e-8103-8aed-e9e1dd8951aa" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-811c-923c-d8bfa59cb1d6" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: { 
+&quot;adressLine1&quot;: &quot; &quot;,
+&quot;city&quot;: &quot; &quot;, 
+&quot;contractId&quot;: null, 
+&quot;country&quot;: &quot;MAR&quot;, 
+&quot;description&quot;: null, 
+&quot;email&quot;: &quot;&quot;,
+&quot;numberOfChildren&quot;: null, 
+&quot;phoneNumber&quot;: &quot;212700446211&quot;, 
+&quot;pidNUmber&quot;: null,
+&quot;pidType&quot;: &quot;&quot;, 
+&quot;products&quot;: [
+{
+&quot;abbreviation&quot;: null,
+&quot;contractId&quot;: &quot;LAN233460579578271&quot;,
+&quot;description&quot;: null, 
+&quot;email&quot;: &quot;&quot;,
+&quot;level&quot;: &quot;&quot;,
+&quot;name&quot;: &quot;CDP BASIC&quot;,
+&quot;phoneNumber&quot;: &quot;212700446211&quot;,
+&quot;productTypeId&quot;: &quot;000&quot;, 
+&quot;productTypeName&quot;: &quot;PARTICULIER&quot;, 
+&quot;provider&quot;: &quot;ORANGE &quot;,
+&quot;rib&quot;: &quot;853455230818452878570832&quot;,
+&quot;solde&quot;: &quot;0.00&quot;,
+&quot;statusId&quot;: &quot;1&quot;,
+&quot;tierType&quot;: &quot;03&quot;,
+&quot;uid&quot;: &quot;000&quot;
+}
+],
+&quot;radical&quot;: &quot;&quot;,
+&quot;soldeCumule&quot;: &quot;0.00&quot;, 
+&quot;statusId&quot;: null, 
+&quot;tierFirstName&quot;: &quot;Prenom&quot;,
+&quot;tierId&quot;: &quot;TR2334600322963601&quot;,
+&quot;tierLastName&quot;: &quot;nom&quot;, 
+&quot;userName&quot;: null, 
+&quot;familyStatus&quot;: null
+}
+}
+</code></pre><h3 id="2ba85dd4-d74e-81bf-b955-f738ad106abf" class="">4.3 - Consultation of transaction history</h3><p id="2ba85dd4-d74e-812f-acc9-ed88d2c88e53" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8184-8361-c216b6bd9a01" class="">Retrieve transaction history by contract number</p><p id="2ba85dd4-d74e-8111-a851-c6984c3590bd" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8139-9f00-ec8792f298fb" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">GET /wallet/operations
+
+</code></pre><p id="2ba85dd4-d74e-818c-8d27-f58f7c097d01" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-811a-8cfc-c5a40c1ad790" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">contractid= LAN193541347060000000001</code></pre><p id="2ba85dd4-d74e-8132-a3db-c555d40a6f77" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8184-ba15-fb87e347c934" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-817c-8d7f-da64a022ea99" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8121-91ef-d6ae378db037" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: [
+{
+&quot;amount&quot;: &quot;10.00&quot;, 
+&quot;Fees&quot;:&quot;4 &quot; , 
+&quot;beneficiaryFirstName&quot;: &quot;Prenom&quot;, 
+&quot;beneficiaryLastName&quot;: &quot;nom&quot;, 
+&quot;beneficiaryRIB&quot;: null,
+&quot;clientNote&quot;: &quot;W2W&quot;,
+&quot;contractId&quot;: null,
+&quot;currency&quot;: &quot;MAD&quot;,
+&quot;date&quot;: &quot;12/8/2023 5:59:39 PM&quot;, 
+&quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+&quot;frais&quot;: [], 
+&quot;numTel&quot;: null, 
+&quot;operation&quot;: null,
+&quot;referenceId&quot;: &quot;1181798513&quot;, 
+&quot;sign&quot;: null,
+&quot;srcDestNumber&quot;: &quot;212755123456&quot;,
+&quot;status&quot;: &quot;000&quot;,
+&quot;totalAmount&quot;: &quot;10.00&quot;,
+&quot;totalFrai&quot;: &quot;6.00&quot;,
+&quot;type&quot;: &quot;MMD&quot;, 
+&quot;isCanceled&quot;: false, 
+&quot;isTierCashIn&quot;:false, 
+&quot;totalPage&quot;: 163
+},
+{ &quot;amount&quot;: &quot;10.00&quot;, 
+&quot;Fees&quot;:&quot;4 &quot; , 
+&quot;beneficiaryFirstName&quot;: &quot;DJGHJDGJ&quot;, 
+&quot;beneficiaryLastName&quot;: &quot;DGJDGHJDG&quot;, 
+&quot;beneficiaryRIB&quot;: null,
+&quot;clientNote&quot;: &quot;W2W&quot;, 
+&quot;contractId&quot;: null,
+&quot;currency&quot;: &quot;MAD&quot;,
+&quot;date&quot;: &quot;12/8/2023 5:54:44 PM&quot;, 
+&quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+&quot;frais&quot;: [], 
+&quot;numTel&quot;: null, 
+&quot;operation&quot;: null,
+&quot;referenceId&quot;: &quot;1792782055&quot;, 
+&quot;sign&quot;: null,
+&quot;srcDestNumber&quot;: &quot;212666233333&quot;,
+&quot;status&quot;: &quot;000&quot;,
+&quot;totalAmount&quot;: &quot;10.00&quot;,
+&quot;totalFrai&quot;: &quot;6.00&quot;,
+&quot;type&quot;: &quot;MMD&quot;, 
+&quot;isCanceled&quot;: false, 
+&quot;isTierCashIn&quot;:false, 
+&quot;totalPage&quot;: 163
+},
+{
+&quot;amount&quot;: &quot;10.00&quot;, 
+&quot;Fees&quot;:&quot;4 &quot; , 
+&quot;beneficiaryFirstName&quot;: &quot;DJGHJDGJ&quot;, 
+&quot;beneficiaryLastName&quot;: &quot;DGJDGHJDG&quot;, 
+&quot;beneficiaryRIB&quot;: null,
+&quot;clientNote&quot;: &quot;W2W&quot;, 
+&quot;contractId&quot;: null, 
+&quot;currency&quot;: &quot;MAD&quot;,
+&quot;date&quot;: &quot;12/8/2023 5:54:20 PM&quot;, 
+&quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+&quot;frais&quot;: [], 
+&quot;numTel&quot;: null, 
+&quot;operation&quot;: null,
+&quot;referenceId&quot;: &quot;0548510077&quot;, 
+&quot;sign&quot;: null,
+&quot;srcDestNumber&quot;: &quot;212666233333&quot;,
+&quot;status&quot;: &quot;000&quot;,
+&quot;totalAmount&quot;: &quot;10.00&quot;,
+&quot;totalFrai&quot;: &quot;6.00&quot;,
+&quot;type&quot;: &quot;MMD&quot;, 
+&quot;isCanceled&quot;: false, 
+&quot;isTierCashIn&quot;:false, 
+&quot;totalPage&quot;: 163
+}
+]
+}
+</code></pre><h3 id="2ba85dd4-d74e-81f3-8c9f-f3bfcaaf2366" class="">4.4 - Balance consultation</h3><p id="2ba85dd4-d74e-8124-9af9-d35410b693b1" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81c7-be79-ea54613c4e35" class="">Retrieve wallet balance</p><p id="2ba85dd4-d74e-8190-873f-dfca2bf88107" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8159-904b-dc5b77c923a5" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">GET  /wallet/balance</code></pre><p id="2ba85dd4-d74e-813f-b1a7-e7ef94f1c2bd" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81cf-85be-c85885a9120a" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">contractid= MLAN19303084416000000001 (obligatoire)</code></pre><p id="2ba85dd4-d74e-8182-8e88-c8411e3e83b9" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-813e-83e1-db4b1db889bb" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8189-a0c2-c23ebde66c20" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-810f-ada4-d40e34318f6f" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: {
+&quot;balance&quot;: [
+{
+&quot;value&quot;: &quot;12556,88&quot;
+}
+]
+}
+}</code></pre><h3 id="2ba85dd4-d74e-813d-9f5d-e56b472c52c4" class="">4.5 - Cash IN</h3><p id="2ba85dd4-d74e-811e-9a01-fd2a9af95a60" class="">There are two steps to feeding a wallet:</p><ul id="2ba85dd4-d74e-8197-9e02-d4a7a809e71b" class="bulleted-list"><li style="list-style-type:disc">Cash IN Simulation: to enter all transaction information.</li></ul><ul id="2ba85dd4-d74e-814f-8935-ff7843f4080e" class="bulleted-list"><li style="list-style-type:disc">Cash IN Confirmation: to validate the transaction.</li></ul><p id="2ba85dd4-d74e-8124-8ce9-ecb4e7fd5685" class=""><strong>4.5.1 - Cash IN Simulation</strong></p><p id="2ba85dd4-d74e-819b-bef8-dda2d330e44c" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8186-8aa1-f3edfa14847e" class="">CASH IN transaction simulation</p><p id="2ba85dd4-d74e-8115-9cfb-c26ba962252b" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a7-9703-fe8d41cb0fbb" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/in
+
+</code></pre><p id="2ba85dd4-d74e-8164-91f8-e8b3d4270766" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81db-82bf-cfd8e1826b8b" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation
+Fees (Facultatif)</code></pre><p id="2ba85dd4-d74e-818c-88a8-e6de1d678836" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81bd-b509-cc5b63271bba" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;contractId&quot;: &quot;LAN230325007133701&quot;,
+&quot;level&quot;: &quot;2&quot;,
+&quot;phoneNumber&quot;: &quot;212666141490&quot;,
+&quot;amount&quot;: &quot;10&quot; , 
+&quot;fees&quot;:&quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-817f-8f19-e580ae0831e8" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81e4-9572-f04cf656596c" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{ &quot;result&quot;: { 
+&quot;Fees&quot;:&quot;0.0&quot;,
+&quot;feeDetail&quot;: &quot;[{Nature:\&quot;COM\&quot;,InvariantFee:0.000,VariantFee:0.0000000}]&quot;, 
+&quot;token&quot;: &quot;9E120058B31A4B77BA3A1CEF96142681&quot;,
+&quot;amountToCollect&quot;: 10, 
+&quot;isTier&quot;: true,
+&quot;cardId&quot;: &quot;LAN230325007133701&quot;, 
+&quot;transactionId&quot;: &quot;200116022024182720001&quot;,
+&quot;benFirstName&quot;: &quot;cba&quot;, 
+&quot;benLastName&quot;: &quot;Abc&quot;
+}
+}</code></pre><hr id="2ba85dd4-d74e-8155-af03-f506aa0e7232"/><p id="2ba85dd4-d74e-817c-970a-c39295799a96" class=""><strong>4.5.2 - Cash IN Confirmation</strong></p><p id="2ba85dd4-d74e-817a-8fca-d6f3d8c000ed" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-814d-abf4-f87025ab27d6" class="">Confirmation of CASH IN operation</p><p id="2ba85dd4-d74e-8170-bc75-e770e0246b44" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-812f-9ae3-e0a376337051" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/in
+
+</code></pre><p id="2ba85dd4-d74e-81db-8bb1-fb25965657e5" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8195-9737-ed0437968b38" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation
+Fees (Facultatif)</code></pre><p id="2ba85dd4-d74e-81b1-aec3-cc3e2c6108bf" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8195-95bb-e341baee6c0d" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;token&quot;:&quot; 9E120058B31A4B77BA3A1CEF96142681&quot;,
+&quot;amount&quot;: &quot;10&quot;,
+&quot;fees&quot;:&quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-814a-a2eb-dfe2122634bf" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8169-a20a-f95c945ead8b" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{&quot;result&quot;: { 
+&quot;Fees&quot;:&quot;0.0&quot;,
+&quot;feeDetails&quot;: null,
+&quot;token&quot;: &quot;9E120058B31A4B77BA3A1CEF96142681&quot;,
+&quot;amount&quot;: 10,
+&quot;transactionReference&quot;: &quot;0288284881&quot;, 
+&quot;optFieldOutput1&quot;: null,
+&quot;optFieldOutput2&quot;: null,
+&quot;cardId&quot;: &quot;LAN230325007133701&quot;
+}
+}</code></pre><h3 id="2ba85dd4-d74e-81e1-b859-ce960e7b8ce6" class="">4.6 - Cash OUT</h3><p id="2ba85dd4-d74e-81e5-98a3-c5fac136c194" class="">Withdrawing funds from a wallet takes place in three stages:</p><ul id="2ba85dd4-d74e-81ea-a904-dbc85a80fe31" class="bulleted-list"><li style="list-style-type:disc">Cash OUT Simulation: enter transaction information.</li></ul><ul id="2ba85dd4-d74e-81a1-baec-dc0b52a71cc1" class="bulleted-list"><li style="list-style-type:disc">Cash OUT OTP: generation of the OTP for transaction validation.</li></ul><ul id="2ba85dd4-d74e-81dd-ae82-c5371d17a32a" class="bulleted-list"><li style="list-style-type:disc">Cash OUT Confirmation: transaction validation.</li></ul><p id="2ba85dd4-d74e-8175-8c86-d403277e2956" class=""><strong>4.6.1 - Cash OUT Simulation</strong></p><p id="2ba85dd4-d74e-81d3-a0cc-d8876a8c9847" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81c4-8a31-d90bcbf1ca99" class="">cash withdrawal simulation from a customer account</p><p id="2ba85dd4-d74e-818e-810b-f15efb153d5e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81ab-bca6-e975b7ec0e85" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/out</code></pre><p id="2ba85dd4-d74e-8137-9eaf-e80da072e48a" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8156-b684-f70294ff6ab3" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation
+Fees (Facultatif)</code></pre><p id="2ba85dd4-d74e-81e4-ba91-d01268f2d739" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81fd-97da-edbb0a9425c6" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot; 212672300232&quot;,
+&quot;amount&quot;: &quot;10&quot;, 
+&quot;fees&quot;:&quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-81e7-b819-eadfa243bd39" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8186-8edd-d49b92c8d821" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{ &quot;result&quot;: { 
+&quot;Fees&quot;:&quot;0.0&quot;,
+&quot;token&quot;: &quot;C03C2A65318440A093670380B276F2E2&quot;,
+&quot;amountToCollect&quot;: 10,
+&quot;cashOut_Max&quot;: 1918, 
+&quot;optFieldOutput1&quot;: null,
+&quot;optFieldOutput2&quot;: null,
+&quot;cardId&quot;: &quot;LAN230748934021281&quot;, 
+&quot;transactionId&quot;: &quot;200816022024182925001&quot;,
+&quot;feeDetail&quot;: &quot;[{Nature:\&quot;COM\&quot;,InvariantFee:0.000,VariantFee:0.0000000}]&quot;
+}
+}</code></pre><hr id="2ba85dd4-d74e-810e-8d7c-db173e10e731"/><p id="2ba85dd4-d74e-8179-918f-e1b6a4f77928" class=""><strong>4.6.2 - Cash OUT OTP</strong></p><p id="2ba85dd4-d74e-8155-a9c4-e6622d0a4a59" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-812c-a45f-e5250d26579e" class="">Generates an OTP for the CASH OUT operation.</p><p id="2ba85dd4-d74e-810e-a24b-f1c3c6b96848" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8181-a51a-e6149cab8bd4" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/out/otp
+
+</code></pre><p id="2ba85dd4-d74e-81c9-a8ec-e57f9857e766" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8197-8962-def7d25cb764" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8156-b015-cd497e1806ce" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-810c-9a86-db23a45f55ee" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot; 212672300232&quot;
+}</code></pre><p id="2ba85dd4-d74e-8164-a27c-dd6e93a6f3f1" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81bb-90a2-d238aeb8709a" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: [
+{
+&quot;codeOtp&quot;: &quot;771401&quot;
+}
+]
+}</code></pre><p id="2ba85dd4-d74e-815a-9a25-fe72eb85d507" class=""><strong>4.6.3 - Cash OUT Confirmation</strong></p><p id="2ba85dd4-d74e-81d7-86e3-de53e612892e" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-819b-a0e4-fcd87a427399" class="">Confirmation of CASHOUT operation</p><p id="2ba85dd4-d74e-817e-b78e-e70f53e5125e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-810f-b676-e679a5a69121" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/out
+
+</code></pre><p id="2ba85dd4-d74e-8187-b2a8-e8c35df72230" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a2-a5cd-c130be605841" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation
+Fees (Facultatif)</code></pre><p id="2ba85dd4-d74e-81cb-9fe9-c7b5034dcdab" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d1-833a-cc7786df05e4" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;token&quot;: &quot; C03C2A65318440A093670380B276F2E2&quot;,
+&quot;phoneNumber&quot;: &quot;212655305530&quot;,
+&quot;otp&quot;: &quot;123456&quot;,
+&quot;amount&quot;: &quot;10&quot;, 
+&quot;fees&quot;:&quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-81fd-bb41-cfac6472070a" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d6-9787-f521d0c9667d" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: { 
+&quot;Fees&quot;:&quot;0.0&quot;,
+&quot;feeDetails&quot;: null,
+&quot;token&quot;: &quot;C03C2A65318440A093670380B276F2E2&quot;,
+&quot;amount&quot;: 10,
+&quot;transactionReference&quot;: &quot;1354275502&quot;, 
+&quot;optFieldOutput1&quot;: null, 
+&quot;optFieldOutput2&quot;: null,
+&quot;cardId&quot;: &quot;LAN230748934021281&quot;
+} }</code></pre><p id="2ba85dd4-d74e-811d-a323-e31d696274d8" class="">
+</p><h3 id="2ba85dd4-d74e-81d7-9664-ff45fe994bc3" class="">4.7 - Wallet to Wallet</h3><p id="2ba85dd4-d74e-812e-b8dd-cca6907c5d75" class="">The transfer between two wallets takes place in three stages:</p><ul id="2ba85dd4-d74e-8165-a191-c5ee8aab3775" class="bulleted-list"><li style="list-style-type:disc">Wallet to Wallet Simulation: enter transaction information.</li></ul><ul id="2ba85dd4-d74e-81a3-842d-d646c5ce3f43" class="bulleted-list"><li style="list-style-type:disc">Wallet to Wallet OTP: generate the OTP for transaction validation.</li></ul><ul id="2ba85dd4-d74e-81b9-83e1-cbb3b9e2d2aa" class="bulleted-list"><li style="list-style-type:disc">Wallet to Wallet Confirmation: validate the transaction.</li></ul><p id="2ba85dd4-d74e-81c7-b22f-f896c972d4f0" class=""><strong>4.7.1 - Wallet to Wallet Simulation</strong></p><p id="2ba85dd4-d74e-8169-8c1c-f0a5230831d9" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81ad-a518-f05019723e9b" class="">issuing a wallet-to-wallet transfer</p><p id="2ba85dd4-d74e-813f-95c4-fdf67982f45f" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8159-952b-ec6908444093" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /wallet/transfer/wallet</code></pre><p id="2ba85dd4-d74e-8184-90db-c312d09bfdf8" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8122-af06-c2aa83ebf0f4" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation
+Client Note(Facultatif)
+Fees (Facultatif)</code></pre><p id="2ba85dd4-d74e-81c7-8913-fa34be7789fb" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8124-bdea-f63c41ac3c94" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;clentNote&quot;: &quot;W2W&quot;,
+&quot;contractId&quot;: &quot;LAN193541347060000000001&quot;,
+&quot;amout&quot;: &quot;2&quot;,
+&quot;fees&quot;:&quot;0&quot;,
+&quot;destinationPhone&quot;: &quot;212755123456&quot;,
+&quot;mobileNumber&quot;: &quot;212666233333&quot;
+}</code></pre><p id="2ba85dd4-d74e-8100-bb1e-e2598f55374a" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-819e-bbda-c1b43a34bb88" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: { 
+&quot;amount&quot;: &quot;2&quot;,
+ &quot;Fees&quot;:&quot;0.0&quot;,
+&quot;beneficiaryFirstName&quot;: &quot;Prenom&quot;, 
+&quot;beneficiaryLastName&quot;: &quot;nom&quot;, 
+&quot;beneficiaryRIB&quot;: null,
+&quot;contractId&quot;: null, 
+&quot;currency&quot;: null, 
+&quot;date&quot;: null,
+&quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+&quot;frais&quot;: [
+{
+&quot;currency&quot;: &quot;MAD&quot;,
+&quot;fullName&quot;: &quot;&quot;,
+&quot;name&quot;: &quot;COM&quot;, 
+&quot;referenceId&quot;: &quot;2067400459&quot;,
+&quot;value&quot;: 5
+},
+{
+&quot;currency&quot;: &quot;MAD&quot;,
+&quot;fullName&quot;: &quot;&quot;,
+&quot;name&quot;: &quot;TVA&quot;,
+&quot;referenceId&quot;: &quot;2067400459&quot;,
+&quot;value&quot;: 1
+}
+],
+&quot;numTel&quot;: null, 
+&quot;operation&quot;: null,
+&quot;referenceId&quot;: &quot;2067400459&quot;, 
+&quot;sign&quot;: null,
+&quot;srcDestNumber&quot;: null, 
+&quot;status&quot;: null,
+&quot;totalAmount&quot;: &quot;8.00&quot;,
+&quot;totalFrai&quot;: &quot;6.00&quot;,
+&quot;type&quot;: &quot;TT&quot;, 
+&quot;isCanceled&quot;: false, 
+&quot;isTierCashIn&quot;:false
+}
+}</code></pre><hr id="2ba85dd4-d74e-81bd-9ab0-c193c520f658"/><p id="2ba85dd4-d74e-8197-98a4-c169b33cc347" class=""><strong>4.7.2 - Wallet to Wallet OTP</strong></p><p id="2ba85dd4-d74e-817d-b4e9-eb7735922f87" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81af-8167-c607900a2762" class="">Generate OTP for wallet to wallet confirmation service</p><p id="2ba85dd4-d74e-8133-9cf5-ef8c39b2550e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8156-9304-cc82f83cc279" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/transfer/wallet/otp</code></pre><p id="2ba85dd4-d74e-8190-9e27-f4754e36475e" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8104-ae67-c7984acafba8" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-81ff-8f2f-c60b89491a9c" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c3-bfa8-c6bc497e8397" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot; 212666233333&quot;
+}</code></pre><p id="2ba85dd4-d74e-81fb-9bcd-f189b15e9bd9" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8114-8137-e124ef6d8e4b" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: [
+{
+&quot;codeOtp&quot;: &quot;556263&quot;
+}
+]
+}</code></pre><p id="2ba85dd4-d74e-81a6-b6aa-d743abaaddb6" class=""><strong>4.7.3 - Wallet to Wallet confirmation</strong></p><p id="2ba85dd4-d74e-818b-8fe0-ecc430352b2d" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81f7-be00-d4783ecbe6c6" class="">Confirmation that a wallet-to-wallet transfer has been sent</p><p id="2ba85dd4-d74e-81ee-8c7c-fccc2dfa19d0" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81b7-a0e1-e1d016841dd9" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/transfer/wallet</code></pre><p id="2ba85dd4-d74e-8136-918c-f57ac9f0ad64" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8113-97c6-cfeecf796d58" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation</code></pre><p id="2ba85dd4-d74e-811b-8328-db619e8eeff5" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8196-bfcc-efce719caaa2" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;mobileNumber&quot;: &quot;212666233333&quot;, 
+&quot;contractId&quot;: &quot;LAN193541347060000000001&quot;, 
+&quot;otp&quot;: &quot;123456&quot;,
+&quot;referenceId&quot;: &quot;2067400459&quot;,
+&quot;destinationPhone&quot;: &quot;212650134393&quot;,
+&quot;fees&quot;: &quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-8120-87d2-e1a138bf8740" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81e9-ad21-f25269449c56" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: {
+&quot;item1&quot;: { 
+&quot;creditAmounts&quot;: null, 
+&quot;debitAmounts&quot;: null, 
+&quot;depot&quot;: null, 
+&quot;retrait&quot;: null,
+&quot;value&quot;: &quot;-245384.090&quot;
+},
+&quot;item2&quot;: &quot;000&quot;,
+&quot;item3&quot;: &quot;Successful&quot;
+}
+}</code></pre><h3 id="2ba85dd4-d74e-8103-b69d-ca1aef4791f9" class="">4.8 - Transfer</h3><p id="2ba85dd4-d74e-817a-9557-da093a5f206c" class="">The wire transfer transaction takes place in three stages:<div class="indented"><ul id="2ba85dd4-d74e-8145-8fad-cd5b3ec25e09" class="bulleted-list"><li style="list-style-type:disc">Transfer Simulation: enter transaction information.</li></ul><ul id="2ba85dd4-d74e-81ac-98c6-fa1ecba8ca8a" class="bulleted-list"><li style="list-style-type:disc">Transfer OTP: generate the transaction validation OTP.</li></ul><ul id="2ba85dd4-d74e-81e2-b898-c45287c2aeed" class="bulleted-list"><li style="list-style-type:disc">Transfer Confirmation: validate the transaction.</li></ul></div></p><p id="2ba85dd4-d74e-8102-a787-cac21c34da90" class=""><strong>4.8.1 - Transfer Simulation</strong></p><p id="2ba85dd4-d74e-8126-a84f-d6711d127496" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81c2-a7e2-ea7b69097452" class="">The simulation of the send transfer operation.</p><p id="2ba85dd4-d74e-819a-8c7e-fb667df0c891" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8148-8ba0-fb61d7566314" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /wallet/transfer/virement</code></pre><p id="2ba85dd4-d74e-8196-b049-dc968c7c5c8e" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81bb-8bdf-caf263e0abdd" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation</code></pre><p id="2ba85dd4-d74e-8129-a01e-d86308435925" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81b3-beca-ccb7f10d414b" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;clientNote&quot;: &quot;W2W&quot;,
+ &quot;ContractId&quot;: &quot;LAN252387936812761&quot;,
+ &quot;Amount&quot;: &quot;12&quot;,
+ &quot;destinationPhone&quot;: &quot;212665873350&quot;,
+ &quot;mobileNumber&quot;: &quot;212669268097&quot;,
+ &quot;RIB&quot;:&quot;230780530712622100950179&quot;
+}</code></pre><p id="2ba85dd4-d74e-8147-a80b-f8fafad49ce9" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8108-b254-c835279a7e38" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: [
+ {
+ &quot;frais&quot;: &quot;0&quot;,
+ &quot;fraisSms&quot;: null,
+ &quot;totalAmountWithFee&quot;: &quot;12&quot;,
+ &quot;deviseEmissionCode&quot;: null,
+ &quot;fraisInclus&quot;: false,
+ &quot;montantDroitTimbre&quot;: 0,
+ &quot;montantFrais&quot;: 0,
+ &quot;montantFraisSMS&quot;: 0,
+ &quot;montantFraisTotal&quot;: 0,
+ &quot;montantTVA&quot;: 0,
+ &quot;montantTVASMS&quot;: 0,
+ &quot;tauxChange&quot;: 0
+ }
+ ]
+}</code></pre><hr id="2ba85dd4-d74e-81b2-9174-ce68d1a75002"/><p id="2ba85dd4-d74e-81ac-ab6a-dea3bfdff8e3" class=""><strong>4.8.2 - Transfer OTP</strong></p><p id="2ba85dd4-d74e-8137-84e0-cada0dd24da9" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81ec-b6ba-cf66dbd2223c" class="">Sends an OTP code to the specified phone number.</p><p id="2ba85dd4-d74e-8176-946c-e85b109cca34" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-812f-a248-dbb52b272a54" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /wallet/transfer/virement/otp</code></pre><p id="2ba85dd4-d74e-8111-b25b-d5a6d1769e55" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8157-a208-f9a1658b81b4" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-81cf-8880-fe857b4d7dc0" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-815d-948c-cf904d14cd68" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;PhoneNumber&quot;: &quot;212669268097&quot;
+}</code></pre><p id="2ba85dd4-d74e-8191-950c-f7eac0838f27" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a3-b496-e1a52cf2adfb" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: &quot;123456&quot;
+}</code></pre><p id="2ba85dd4-d74e-8172-ab0c-c2f42deef6ac" class=""><strong>4.8.3 - Transfer Confirmation</strong></p><p id="2ba85dd4-d74e-8144-a1de-fdf4cc9fb476" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-815e-8260-ed1db42fe154" class="">Confirmation of the transfer operation.</p><p id="2ba85dd4-d74e-8120-8323-f85cea5356d5" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8122-9403-c811bde58b9c" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /wallet/transfer/virement</code></pre><p id="2ba85dd4-d74e-81b3-b785-ca55acdac0cd" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8130-b9d7-c78417a40b4d" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation</code></pre><p id="2ba85dd4-d74e-8155-8a51-c182f51d5680" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-817f-8e97-d73531de90c8" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;mobileNumber&quot;: &quot;212669268097&quot;,
+&quot;ContractId&quot;: &quot;LAN252387936812761&quot;,
+&quot;Otp&quot;: &quot;123456&quot;,
+&quot;referenceId&quot;: &quot;0152475499&quot;,
+&quot;destinationPhone&quot;: &quot;212665873350&quot;,
+&quot;fees&quot;: &quot;0&quot;,
+&quot;Amount&quot;:&quot;12&quot;,
+&quot;RIB&quot;:&quot;230780530712622100950179&quot;,
+&quot;NumBeneficiaire&quot;:&quot;212665873350&quot;,
+&quot;DestinationFirstName&quot;: &quot;test firstname&quot;,
+&quot;DestinationLastName&quot;: &quot;test lastname&quot;
+}</code></pre><p id="2ba85dd4-d74e-8149-a538-db78c098e3c1" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81f9-a49d-fd7cc608e7ce" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;contractId&quot;: &quot;LAN252387936812761&quot;,
+ &quot;reference&quot;: &quot;709846211156&quot;
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-813d-ab52-cc76aa87134d" class="">4.9 - ATM withdrawal</h3><p id="2ba85dd4-d74e-813c-8dfa-cbed36996d42" class="">There are three steps to ATM withdrawal:<div class="indented"><ul id="2ba85dd4-d74e-81c5-84b4-f0aee07175fc" class="bulleted-list"><li style="list-style-type:disc">ATM withdrawal Simulation: enter transaction information.</li></ul><ul id="2ba85dd4-d74e-81ab-bc40-e4d797620a1d" class="bulleted-list"><li style="list-style-type:disc">ATM Withdrawal OTP: generate transaction confirmation OTP.</li></ul><ul id="2ba85dd4-d74e-81dc-a573-e4487a8e87af" class="bulleted-list"><li style="list-style-type:disc">ATM Withdrawal Confirmation: transaction validation.</li></ul></div></p><p id="2ba85dd4-d74e-813b-ada7-c6d9467cd003" class=""><strong>4.9.1 - ATM Withdrawal Simulation</strong></p><p id="2ba85dd4-d74e-81e9-971f-d07a03c631ca" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-816f-8875-fffd461bdff3" class="">API used to simulate an ATM withdrawal from a wallet. It validates the input parameters (amount, issuing wallet) and returns a transaction identifier with the data required for the rest of the process.</p><p id="2ba85dd4-d74e-81aa-86f2-e97898c57571" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c5-ba49-fe9b3ead71d6" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/gab/out</code></pre><p id="2ba85dd4-d74e-81dc-8095-e2639a0c08c9" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d3-a4b3-efa1cb50affb" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation</code></pre><p id="2ba85dd4-d74e-8135-a0dc-ee3d5e16347b" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8121-bab5-f3374ceda945" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;ContractId&quot;: &quot; LAN251276004694521&quot;,
+ &quot;Amount&quot;: &quot;200&quot;
+}</code></pre><p id="2ba85dd4-d74e-810c-8743-d50f86af451d" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-814f-b8b5-d4c55bee4acf" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;totalFrai&quot;: &quot;3.00&quot;,
+ &quot;feeDetails&quot;: 
+&quot;[{Nature:\&quot;COM\&quot;,InvariantFee:3.000,VariantFee:0.0000000},{Nature:\&quot;TVA\&quot;,Invariant
+Fee:0.000,VariantFee:0.27}]&quot;,
+ &quot;token&quot;: &quot;2383FD7C082545C696E8597FDAE8EB21&quot;,
+ &quot;totalAmount&quot;: 203,
+ &quot;referenceId&quot;: &quot;0273802387&quot;
+ }
+}</code></pre><hr id="2ba85dd4-d74e-8124-8f82-e04ff0976b4b"/><p id="2ba85dd4-d74e-813e-8ba7-dccb45f6adfe" class=""><strong>4.9.2 - ATM withdrawal OTP</strong></p><p id="2ba85dd4-d74e-8137-84c8-f59dc04b9aeb" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-819e-b881-f305efe73465" class="">API triggering the sending of an OTP to the number linked to the issuing wallet. It is used to secure the operation before confirmation, with code expiration management.</p><p id="2ba85dd4-d74e-8103-bff1-ef75bef51e9e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c8-a23e-c1b4d95ba42f" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/gab/otp</code></pre><p id="2ba85dd4-d74e-8112-a566-c06c41ce835b" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8142-a8e0-ca7be77ee4ba" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8181-84c5-c30665ff2843" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81cb-8a0e-ee7873702355" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot;0671219423&quot;
+}</code></pre><p id="2ba85dd4-d74e-81ba-955f-d4dd44903dc9" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-818c-93fd-da0fbbdbb8fe" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: [
+ {
+ &quot;codeOtp&quot;: &quot;123456&quot;
+ }
+ ]
+}</code></pre><p id="2ba85dd4-d74e-8128-a736-d0f362de103c" class=""><strong>4.9.3 - ATM withdrawal Confirmation</strong></p><p id="2ba85dd4-d74e-81d0-92ac-e4d115f38ec2" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-814b-aeac-cd20d7b57b86" class="">ATM withdrawal confirmation API. It consumes the OTP entered by the user and finalizes the</p><p id="2ba85dd4-d74e-8150-8b22-f337da78de7b" class="">the transaction by debiting the wallet and generating a proof of withdrawal.</p><p id="2ba85dd4-d74e-817f-a0a1-c87448a55f41" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-819e-95ca-c123a5fd7a6a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/cash/gab/out</code></pre><p id="2ba85dd4-d74e-817d-96e0-f99932632734" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d5-bde7-fe3d35be9e3e" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation</code></pre><p id="2ba85dd4-d74e-81cd-9540-d081d399b3c8" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8188-b858-cfde87ec1cc8" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;ContractId&quot;: &quot; LAN251276004694521&quot;,
+ &quot;PhoneNumberBeneficiary&quot;: &quot;0671219423&quot;,
+ &quot;Token&quot;: &quot;FC10F77242AA41D9A7632623EAD0FF96&quot;,
+ &quot;ReferenceId&quot;: &quot;1644819990&quot;,
+ &quot;Otp&quot;: &quot;123456&quot;
+}</code></pre><p id="2ba85dd4-d74e-8144-afdc-ed88510800df" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a1-a541-cf4a8055c720" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;fee&quot;: &quot;0.00&quot;,
+ &quot;feeDetails&quot;: null,
+ &quot;token&quot;: &quot;CED3B51B4FD245C39B961C5CABA816EF&quot;,
+ &quot;amount&quot;: 200,
+ &quot;transactionReference&quot;: &quot;&quot;,
+ &quot;cardId&quot;: &quot;LAN251276004694521&quot;,
+ &quot;transactionId&quot;: 1321768214,
+ &quot;transfertCihExpressReference&quot;: &quot;00230110002126023062025&quot;,
+ &quot;redCode&quot;: null,
+ &quot;greenCode&quot;: null
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-8163-961a-dba304678f06" class="">4.10 - Wallet to Merchant transaction</h3><p id="2ba85dd4-d74e-8158-a319-e083a1647bbd" class="">This transaction takes place in three stages:<div class="indented"><ul id="2ba85dd4-d74e-81a7-8e99-d7dfea4ebdf4" class="bulleted-list"><li style="list-style-type:disc">Wallet to Merchant Simulation.</li></ul><ul id="2ba85dd4-d74e-81e5-9cf1-c9de7f791989" class="bulleted-list"><li style="list-style-type:disc">Wallet to Merchant OTP</li></ul><ul id="2ba85dd4-d74e-81f9-88c7-c44851b66a0f" class="bulleted-list"><li style="list-style-type:disc">Wallet to Merchant Confirmation.</li></ul></div></p><p id="2ba85dd4-d74e-813b-a5f3-f58fbf6d0370" class=""><strong>4.10.1 - Wallet to Merchant Simulation</strong></p><p id="2ba85dd4-d74e-81a6-9467-c4a34416f89d" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8122-b55c-d8a929428d91" class="">Initiate Wallet to Merchant transaction.</p><p id="2ba85dd4-d74e-81b9-9aba-cd795eb04a35" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8107-8e54-ce8255197531" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/Transfer/WalletToMerchant</code></pre><p id="2ba85dd4-d74e-8127-929f-e4a153b22d0b" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c6-bd57-f9ad87c65ddf" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=simulation</code></pre><p id="2ba85dd4-d74e-81a5-b3b8-e1901bcf3687" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8151-8e8a-e8cadf1a7f40" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;clientNote&quot;: &quot;test&quot;,
+ &quot;clientContractId&quot;: &quot;LAN250383003224941&quot;,
+ &quot;Amout&quot;: &quot;10&quot;,
+ &quot;clientPhoneNumber&quot;: &quot;212665873350&quot;,
+ &quot;merchantPhoneNumber&quot;: &quot;212657575733&quot;
+}</code></pre><p id="2ba85dd4-d74e-81ed-a630-f515542e7b79" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8142-9735-d800e84cbc89" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;amount&quot;: &quot;10&quot;,
+ &quot;beneficiaryFirstName&quot;: &quot;cddsds&quot;,
+ &quot;beneficiaryLastName&quot;: &quot;EDFdd&quot;,
+ &quot;beneficiaryRIB&quot;: null,
+ &quot;clientNote&quot;: &quot;test&quot;,
+ &quot;contractId&quot;: null,
+ &quot;currency&quot;: null,
+ &quot;date&quot;: null,
+ &quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+ &quot;frais&quot;: [],
+ &quot;numTel&quot;: null,
+ &quot;operation&quot;: null,
+ &quot;referenceId&quot;: &quot;0116178499&quot;,
+ &quot;sign&quot;: null,
+ &quot;srcDestNumber&quot;: null,
+ &quot;status&quot;: null,
+ &quot;totalAmount&quot;: &quot;10&quot;,
+ &quot;totalFrai&quot;: &quot;0&quot;,
+ &quot;type&quot;: &quot;TM&quot;,
+ &quot;isCanceled&quot;: false,
+ &quot;isTierCashIn&quot;: false,
+ &quot;feeDetails&quot;: null,
+ &quot;token&quot;: null,
+ &quot;optFieldOutput1&quot;: null,
+ &quot;optFieldOutput2&quot;: null,
+ &quot;cardId&quot;: null,
+ &quot;isSwitch&quot;: false
+ }
+}</code></pre><hr id="2ba85dd4-d74e-8112-9702-e2c2727ac98f"/><p id="2ba85dd4-d74e-81d1-bbf8-e7d8e6041eb9" class=""><strong>4.10.2 - Wallet to Merchant OTP</strong></p><p id="2ba85dd4-d74e-8180-84c6-febe5f071ae8" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81c9-9adb-caa027ee1a3a" class="">Send OTP for Wallet to Merchant transaction.</p><p id="2ba85dd4-d74e-81a1-ad2f-ee04b9f7020e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81b0-90d4-e100359abaa4" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/walletToMerchant/cash/out/otp</code></pre><p id="2ba85dd4-d74e-814e-9805-cba7c451d81a" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8118-b045-d3048f2e1550" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8131-adce-f97fadac3496" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8122-8679-d70761c3a049" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot;212665873350&quot;
+}</code></pre><p id="2ba85dd4-d74e-81bf-a875-ec9e4a7f5c58" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-816b-b28a-c22357800927" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: [
+ {
+ &quot;codeOtp&quot;: &quot;326746&quot;
+ }
+ ]
+}</code></pre><hr id="2ba85dd4-d74e-81c6-a1e8-edc455e2ce23"/><p id="2ba85dd4-d74e-81c9-af59-dad1d166e103" class=""><strong>4.10.3 - Wallet to Merchant Confirmation</strong></p><p id="2ba85dd4-d74e-8186-bd51-f9b3f9207fe5" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8140-a266-e2a470ad06dc" class="">Confirm a fund transfer from a Wallet to a merchant after running the simulation, including the OTP to verify the transaction.</p><p id="2ba85dd4-d74e-8159-9456-e4387091d5b1" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8148-8fb2-c86d985a8fee" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /wallet/Transfer/WalletToMerchant</code></pre><p id="2ba85dd4-d74e-81cd-bd14-d9a82ec34548" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-813e-a60d-d653b3c517a2" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">step=confirmation</code></pre><p id="2ba85dd4-d74e-8145-9c73-f1a6ce39ddc2" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-819e-afd1-cff8a8302243" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;ClientPhoneNumber&quot;: &quot;0612345678&quot;,
+ &quot;ClientContractId&quot;: &quot;CONTRACT123&quot;,
+ &quot;OTP&quot;: &quot;123456&quot;,
+ &quot;ReferenceId&quot;: &quot;REF123456789&quot;,
+ &quot;DestinationPhone&quot;: &quot;0698765432&quot;,
+ &quot;QrCode&quot;: &quot;QR123456789&quot;,
+ &quot;MCC&quot;: &quot;5411&quot;,
+ &quot;AmountInputMode&quot;: &quot;ENTERED&quot;,
+ &quot;fees&quot;: &quot;0&quot;
+}</code></pre><p id="2ba85dd4-d74e-81b8-9002-d8a1d0970942" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a7-bedc-c9509d97b956" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;item1&quot;: {
+ &quot;creditAmounts&quot;: null,
+ &quot;debitAmounts&quot;: null,
+ &quot;depot&quot;: null,
+ &quot;retrait&quot;: null,
+ &quot;value&quot;: &quot;17.460&quot;,
+ &quot;transactionId&quot;: null,
+ &quot;cardId&quot;: null,
+ &quot;optFieldOutput2&quot;: null,
+ &quot;optFieldOutput1&quot;: null,
+ &quot;transactionReference&quot;: null,
+ &quot;amount&quot;: null,
+ &quot;token&quot;: null,
+ &quot;fee&quot;: null,
+ &quot;feeDetails&quot;: null
+ },
+ &quot;item2&quot;: &quot;000&quot;,
+ &quot;item3&quot;: &quot;Successful&quot;
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-8166-930a-e81df31bf7a1" class="">4.11 - Creating a Merchant Wallet </h3><p id="2ba85dd4-d74e-8116-969b-dfbce6787bfb" class="">Merchant wallet creation takes place in two stages:</p><ul id="2ba85dd4-d74e-811f-be15-d94ea9a16570" class="bulleted-list"><li style="list-style-type:disc">Merchant Wallet Pre-creation.</li></ul><ul id="2ba85dd4-d74e-816b-91f6-f996888c97f1" class="bulleted-list"><li style="list-style-type:disc">Merchant Wallet activation.</li></ul><p id="2ba85dd4-d74e-8156-b3b8-e76c1bcec4f8" class=""><strong>4.11.1 - Merchant Wallet Pre-creation</strong></p><p id="2ba85dd4-d74e-812f-8583-da9d39046e29" class=""><strong>Description</strong><div class="indented"><p id="2ba85dd4-d74e-8119-9835-c0b509a8d592" class="">Merchant wallet pre-creation.</p></div></p><p id="2ba85dd4-d74e-811e-a0ac-f1fce7511797" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-811a-a25f-d51962435640" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /merchants</code></pre><p id="2ba85dd4-d74e-8175-89f2-c127583f1b1a" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d3-8541-da2406e5d77b" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8102-8ec7-c35b572807fc" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81d7-a0ca-f241537872f4" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;FirstName&quot;: &quot;El&quot;,
+ &quot;LastName&quot;: &quot;Ta&quot;,
+ &quot;MobileNumber&quot;: &quot;0600000000&quot;,
+ &quot;Provider&quot;: &quot;IAM&quot;,
+ &quot;Email&quot;: &quot;el.ta@example.com&quot;,
+ &quot;NumberOfChildren&quot;: &quot;4&quot;,
+ &quot;Profession&quot;: &quot;Artisan&quot;,
+ &quot;AverageIncome&quot;: &quot;50000&quot;,
+ &quot;ActivitySector&quot;: &quot;Banking&quot;,
+ &quot;ActivityType&quot;: &quot;Software&quot;,
+ &quot;Gender&quot;: &quot;M&quot;,
+ &quot;IdentificationDocumentType&quot;: &quot;CIN&quot;,
+ &quot;IdentificationNumber&quot;: &quot;BK4444&quot;,
+ &quot;IdentificationExpiryDate&quot;: &quot;31122030&quot;,
+ &quot;PlaceOfBirth&quot;: &quot;Casablanca&quot;,
+ &quot;DateOfBirth&quot;: &quot;20051985&quot;,
+ &quot;LandlineNumber&quot;: &quot;0522222222&quot;,
+ &quot;AddressLine1&quot;: &quot;Rue 1&quot;,
+ &quot;AddressLine2&quot;: &quot;Appt 5&quot;,
+ &quot;City&quot;: &quot;Rabat&quot;,
+ &quot;JobPosition&quot;: &quot;Gérant&quot;,
+ &quot;Nationality&quot;: &quot;Marocaine&quot;,
+ &quot;PostalCode&quot;: &quot;10000&quot;,
+ &quot;Country&quot;: &quot;MAROC&quot;,
+ &quot;CompanyName&quot;: &quot;SARL ShoPech&quot;,
+ &quot;BusinessAddress&quot;: &quot;Avenue des entreprises&quot;,
+ &quot;CommercialRegistrationNumber&quot;: &quot;RC123456&quot;,
+ &quot;TaxIdentificationNumber&quot;: &quot;IF789456&quot;,
+ &quot;CompanyRegistrationId&quot;: &quot;ICE789123&quot;,
+ &quot;TradeLicenseNumber&quot;: &quot;Lic123456&quot;,
+ &quot;MerchantCategory&quot;: &quot;Retail&quot;,
+ &quot;ProfessionalTaxNumber&quot;: &quot;TP789456&quot;,
+ &quot;RegistrationCenter&quot;: &quot;Centre Rabat&quot;,
+ &quot;LegalStructure&quot;: &quot;SARL&quot;,
+ &quot;RegistryRegistrationNumber&quot;: &quot;RR123456&quot;
+}
+</code></pre><p id="2ba85dd4-d74e-8168-ad0f-f9da64baf7f0" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8145-ba48-e1a7b2e2c572" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;token&quot;: &quot;ME2519962089316801&quot;
+ }
+}</code></pre><hr id="2ba85dd4-d74e-811d-86ba-c1ec0e8ea687"/><p id="2ba85dd4-d74e-81b2-9c32-ce7455c91de6" class=""><strong>4.11.2 - Merchant Wallet activation</strong></p><p id="2ba85dd4-d74e-818d-959e-e39a1c4848c9" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81ff-9d93-c62476926bdf" class="">Merchant wallet activation</p><p id="2ba85dd4-d74e-8133-94e1-ff3d158e9c2e" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81e4-81d4-e4a50fed3c8d" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /merchant/activate</code></pre><p id="2ba85dd4-d74e-8147-b31b-f79454607df0" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-814c-873b-f58e8bca1a67" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-818e-84db-c77f034731f4" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a2-83f7-c9b5aea93b75" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;Token&quot;: &quot;ME2519962089316801&quot;,
+ &quot;Otp&quot;: &quot;123456&quot;
+}</code></pre><p id="2ba85dd4-d74e-8176-9b48-f8006ade843c" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8157-affe-d51cc753cc5f" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;contractId&quot;: &quot;LAN251996372325421&quot;
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-8147-8a1a-f099fcc66735" class="">4.12 - Merchant to Merchant transaction</h3><p id="2ba85dd4-d74e-81ab-9b23-c250095746aa" class="">The Merchant to Merchant Transaction takes place in three stages:<div class="indented"><ul id="2ba85dd4-d74e-81c7-aa59-c4bdc7bce4ce" class="bulleted-list"><li style="list-style-type:disc">Merchant to Merchant Simulation.</li></ul><ul id="2ba85dd4-d74e-81ca-8ba7-ce559e394aab" class="bulleted-list"><li style="list-style-type:disc">Merchant to Merchant OTP.</li></ul><ul id="2ba85dd4-d74e-8120-b3b2-f6ad93528ca6" class="bulleted-list"><li style="list-style-type:disc">Merchant to Merchant Confirmation.</li></ul></div></p><p id="2ba85dd4-d74e-8107-b937-f201af9e3769" class=""><strong>4.12.1 - Merchant to Merchant Simulation</strong></p><p id="2ba85dd4-d74e-813e-833c-c1dd4f1a20d7" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8144-aa59-e6066d7c09ab" class="">Transfer funds between two merchant accounts.</p><p id="2ba85dd4-d74e-81b6-8f16-cb3979131186" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8124-bc2e-cf78bfd8ec88" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST /merchant/transaction/simulation</code></pre><p id="2ba85dd4-d74e-819b-a1bd-f7dcd50cbf43" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-810b-8d03-da30240dc48a" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-81d2-9d7a-c260a4b66af6" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8144-8e7a-c0c8ed521762" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;ClientNote&quot;: &quot;M2M&quot;,
+ &quot;ContractId&quot;: &quot;LAN251114678086481&quot;,
+ &quot;Amount&quot;: &quot;100&quot;,
+ &quot;DestinationPhone&quot;: &quot;212645478824&quot;,
+ &quot;MobileNumber&quot;: &quot;212758692536&quot;
+}
+</code></pre><p id="2ba85dd4-d74e-8151-8534-d8c1dfb2691c" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81bb-8f5f-db59cc0fc6ed" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: [
+ {
+ &quot;amount&quot;: &quot;100&quot;,
+ &quot;beneficiaryFirstName&quot;: &quot;Itechia&quot;,
+ &quot;beneficiaryLastName&quot;: &quot;Itechia&quot;,
+ &quot;beneficiaryRIB&quot;: null,
+ &quot;clientNote&quot;: &quot;M2M&quot;,
+ &quot;contractId&quot;: null,
+ &quot;currency&quot;: null,
+ &quot;date&quot;: null,
+ &quot;dateToCompare&quot;: &quot;0001-01-01T00:00:00Z&quot;,
+ &quot;frais&quot;: [
+ {
+ &quot;currency&quot;: &quot;MAD&quot;,
+ &quot;fullName&quot;: &quot;&quot;,
+ &quot;name&quot;: &quot;COM&quot;,
+ &quot;referenceId&quot;: &quot;0009251901&quot;,
+ &quot;value&quot;: 3.33
+ },
+ {
+ &quot;currency&quot;: &quot;MAD&quot;,
+ &quot;fullName&quot;: &quot;&quot;,
+ &quot;name&quot;: &quot;TVA&quot;,
+ &quot;referenceId&quot;: &quot;0009251901&quot;,
+ &quot;value&quot;: 0.67
+ }
+ ],
+ &quot;numTel&quot;: null,
+ &quot;operation&quot;: null,
+ &quot;referenceId&quot;: &quot;0009251901&quot;,
+ &quot;sign&quot;: null,
+ &quot;srcDestNumber&quot;: null,
+ &quot;status&quot;: null,
+ &quot;totalAmount&quot;: &quot;100&quot;,
+ &quot;totalFrai&quot;: &quot;4.00&quot;,
+ &quot;type&quot;: &quot;CC&quot;,
+ &quot;isCanceled&quot;: false,
+ &quot;isTierCashIn&quot;: false,
+ &quot;walletType&quot;: &quot;&quot;
+ }
+ ]
+}</code></pre><hr id="2ba85dd4-d74e-81c5-896f-eac471bf6825"/><p id="2ba85dd4-d74e-81c7-afce-ea698d2ed679" class=""><strong>4.12.2 - Merchant to Merchant OTP</strong></p><p id="2ba85dd4-d74e-8165-a029-c9c4eaf0f33e" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8111-ad3f-fe841c8b06a0" class="">OTP generation.</p><p id="2ba85dd4-d74e-8162-be1a-d792065201a4" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8130-a467-d5fb106f28c3" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /merchant/transaction/otp</code></pre><p id="2ba85dd4-d74e-8160-8613-d61d69e00b20" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-816e-b0ee-c8fb1273f768" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8198-9f73-fff0c3bd75b1" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8143-964a-f35c0a043fe4" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot;212758692536&quot;
+}</code></pre><p id="2ba85dd4-d74e-8191-8dd0-f14e5ce7a16a" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8193-852f-e14760c50790" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: [
+ {
+ &quot;codeOtp&quot;: &quot;320237&quot;
+ }
+ ]
+}</code></pre><p id="2ba85dd4-d74e-8163-b931-e80043158c3e" class=""><strong>4.12.3 - Merchant to Merchant Confirmation</strong></p><p id="2ba85dd4-d74e-818d-8b64-e74cea40ad46" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81fe-9c3e-c2b274df778c" class="">Confirmation and execution of a funds transfer between two merchant accounts.</p><p id="2ba85dd4-d74e-81e7-bade-ed1552015194" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8153-b96d-e25544cf320a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /merchant/transaction/confirmation</code></pre><p id="2ba85dd4-d74e-816b-9b4a-d94b008dc973" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81e0-8744-ff68f59db963" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8165-b212-e035038f4e15" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8107-9299-e99e31e5401e" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;MobileNumber&quot;: &quot;212758692536&quot;,
+ &quot;ContractId&quot;: &quot;LAN251114678086481&quot;,
+ &quot;Otp&quot;: &quot;123456&quot;,
+ &quot;ReferenceId&quot;: &quot;0009251901&quot;
+}</code></pre><p id="2ba85dd4-d74e-81ac-9006-c270905f8cdd" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c9-b207-d8de1461c2f3" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;creditAmounts&quot;: null,
+ &quot;debitAmounts&quot;: null,
+ &quot;depot&quot;: null,
+ &quot;retrait&quot;: null,
+ &quot;value&quot;: &quot;800.000&quot;
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-81db-a533-cd30d405f340" class="">4.13 - Dynamic QR code</h3><p id="2ba85dd4-d74e-8176-aa56-daed57019ba9" class=""><strong>Description</strong>Generate a QR code by the merchant (containing his information as well as the amount to be received) which will be scanned by the customer to make the payment.</p><p id="2ba85dd4-d74e-8113-9f63-e53d5727115a" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8165-ab7a-faf2649a2c7a" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all"> POST /wallet/pro/qrcode/dynamic</code></pre><p id="2ba85dd4-d74e-81ef-8b75-cedd7fdf08ae" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81c0-b7aa-ea8d4594cd2b" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-81b9-8551-eb5aa2468f3c" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8109-9cb8-d8952c762f0f" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;:&quot;21266587335&quot;,
+&quot;contractId&quot;:&quot;LAN250383003221&quot;,
+&quot;amount&quot;:&quot;100&quot;
+}</code></pre><p id="2ba85dd4-d74e-817f-b05a-e1794dd74bb2" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8191-a076-c242d20ffdf6" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;result&quot;: {
+ &quot;phoneNumber&quot;: &quot;212665873350&quot;,
+ &quot;reference&quot;: &quot;&quot;,
+ &quot;token&quot;: &quot;050620251247094208472&quot;,
+ &quot;base64Content&quot;: 
+&quot;iVBORw0KGgoAAAANSUhEUgAAB0QAAAdEAQAAAAD89IUSAAAQTElEQVR4nO3YSbLjyg0A
+QN6A978lbyCHHa1XmKjuBfWHcmKhEFmFIaGdjtf/SVzH3z3BXxWk+wXpfkG6X5DuF6T7Bel+ 
++NvH7/ +Q7hek+ 
+Q7hek+wXpfkG6X5DuF6T7Bel+QbpfkO4XpPsF6X5Bul+Q7hek+wXpfkG6X5DuF6T7Bel+Qbpf
+kO4XpPsF6X5Bul+Q7hek+8X/kfQ/V0JH4IBFAtAAAAAASUVORK5CYII=&quot;,
+ &quot;binaryContent&quot;: 
+&quot;000201010212269300325bb66a92d69c0ea742dd4f754590fa0a02011050100624ibCx5kz
+meNMW6EcTvEaaBw==0715+212665######5052045411530350454031005802MA5907Epi
+cier6010Casablanca62410200030004210506202512470942084720500060064330002en01
+06GROCER0213CASABLANCA0008088003237b3a355b830b3bf0974d23608a6f1620101102
+160001-01-01T00:00031833.529704,-7.639210401063045987&quot;
+ }
+}</code></pre><h3 id="2ba85dd4-d74e-8130-aebc-e7a09fc0a954" class="">4.14 - Merchant to Wallet transaction</h3><p id="2ba85dd4-d74e-81dd-bac6-f5765c6e9846" class="">The Merchant to Wallet transaction takes place in three stages:<div class="indented"><ul id="2ba85dd4-d74e-8100-8d10-ea204547f0f9" class="bulleted-list"><li style="list-style-type:disc">Merchant to Wallet Simulation.</li></ul><ul id="2ba85dd4-d74e-8115-8a9d-e5b175f2166e" class="bulleted-list"><li style="list-style-type:disc">Merchant to Wallet OTP.</li></ul><ul id="2ba85dd4-d74e-815b-a738-df4eb1b2821b" class="bulleted-list"><li style="list-style-type:disc">Merchant to Wallet Confirmation.</li></ul></div></p><p id="2ba85dd4-d74e-8111-8a2e-c2201825ca91" class=""><strong>4.14.1 - Merchant to Wallet Simulation</strong></p><p id="2ba85dd4-d74e-8183-8509-ecd2ac26c2b8" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8152-b964-cb4193177605" class="">Initiate a Merchant to Wallet transfer.</p><p id="2ba85dd4-d74e-8141-815c-f51bed49989c" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81f1-9190-c98b6fdb6843" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all"> POST /merchant/merchantToWallet/simulation</code></pre><p id="2ba85dd4-d74e-819a-92dc-fbf3aafc1463" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8145-ad54-ecb7ae09e89c" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-810d-af8c-e9e573e04ff9" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8196-9cfc-e2161e5ae78b" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;ContractId&quot;: &quot;LAN251996372325421&quot;,
+&quot;Amount&quot;: 15,
+&quot;BeneficiaryPhoneNumber&quot;: &quot;212600000554&quot;
+}</code></pre><p id="2ba85dd4-d74e-810a-b73a-fe44f5302764" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8179-88af-f4e52f7f78e0" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: {
+&quot;amount&quot;: 15.0,
+&quot;feeAmount&quot;: 0.0
+}
+}</code></pre><hr id="2ba85dd4-d74e-81a6-aa5a-e08578f312fe"/><p id="2ba85dd4-d74e-81e8-8804-c25e5d3e8a5c" class=""><strong>4.14.2 - Merchant to Wallet OTP</strong></p><p id="2ba85dd4-d74e-812b-b0c9-de7cf505c6c4" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-81c3-b91b-dbb41a18212c" class="">Sends an OTP code to the specified phone number.</p><p id="2ba85dd4-d74e-8104-9ef1-d6ba2e5e181b" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-818a-a3fe-d8be376c5ee4" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST  /merchant/otp/send</code></pre><p id="2ba85dd4-d74e-8196-bbf6-de989cda1fa2" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81b4-b1c2-c716e9fc8f24" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-813f-97c1-db0479c614ed" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8132-874d-e1006093f45b" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;phoneNumber&quot;: &quot;212627248340&quot;
+}</code></pre><p id="2ba85dd4-d74e-8120-bbad-e1a2c4245078" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81fb-9b3d-c817dc6d625a" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: &quot;&quot;
+}</code></pre><hr id="2ba85dd4-d74e-817e-a42b-c17329f5be4c"/><p id="2ba85dd4-d74e-81d5-b05a-c6bb33a0e9f5" class=""><strong>4.14.3 - Merchant to Wallet Confirmation</strong></p><p id="2ba85dd4-d74e-8128-865d-f514dc16e72f" class=""><strong>Description</strong></p><p id="2ba85dd4-d74e-8192-8941-e6b6ae35ca79" class="">Merchant to wallet transfer confirmation.</p><p id="2ba85dd4-d74e-8107-bd41-db45ee2441f9" class=""><strong>Method &amp; URL</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8163-b624-d083ba190eb1" class="code code-wrap"><code class="language-Plain Text" style="white-space:pre-wrap;word-break:break-all">POST   /merchant/merchantToWallet/confirmation</code></pre><p id="2ba85dd4-d74e-8100-b91c-d6dba633cbf0" class=""><strong>Parameters</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-818c-83ad-f390559277ff" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all"></code></pre><p id="2ba85dd4-d74e-8187-b862-d80b5e89483c" class=""><strong>Body (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81da-afe5-d45f7d690952" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+ &quot;ContractId&quot;:&quot;LAN251996372325421&quot;,
+ &quot;BeneficiaryPhoneNumber&quot;:&quot;212600000554&quot;,
+ &quot;Amount&quot;: 15,
+ &quot;Otp&quot;:&quot;123456&quot;
+}</code></pre><p id="2ba85dd4-d74e-81f8-856a-d3e6cb8a2b5d" class=""><strong>Sample response (JSON)</strong></p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-81a7-b4ce-fecae9ee80bd" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+&quot;result&quot;: {
+&quot;contractId&quot;: null,
+&quot;reference&quot;: &quot;170436959354&quot;,
+&quot;transferAmount&quot;: 0
+}
+}</code></pre><p id="2ba85dd4-d74e-810f-a478-fa7ee00d0f96" class="">
+</p><h2 id="2ba85dd4-d74e-81b7-8b02-dd80e641a2a0" class="">5 - Mock-er an API </h2><p id="2ba85dd4-d74e-811a-b786-f9a1af90254a" class="">During the hackathon, if the API is not available, you can simulate it to continue developing.</p><p id="2ba85dd4-d74e-815e-b6a9-d98401ac9c8e" class="">There are two ways of doing this: mock-ing in the code or using an external tool.</p><hr id="2ba85dd4-d74e-8115-a87e-d5d14b553f98"/><h3 id="2ba85dd4-d74e-81d5-b3d3-e70229aeac48" class="">5.1 - Mocking directly into the code</h3><p id="2ba85dd4-d74e-81da-a24a-ccab2a37a2d4" class="">You create functions that return &quot;fake&quot; data instead of calling the real API.</p><p id="2ba85dd4-d74e-81fc-a531-c5cce7f5361f" class="">Example:</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-8143-979e-d36a6855dc4e" class="code code-wrap"><code class="language-JavaScript" style="white-space:pre-wrap;word-break:break-all">const mockLogin = () =&gt; ({
+  token: &quot;demo-token&quot;,
+  user: { id: 1, name: &quot;demo&quot; }
+});
+
+</code></pre><p id="2ba85dd4-d74e-8152-b6de-fe8311bf0174" class="">✔️ Ultra fast</p><p id="2ba85dd4-d74e-817a-940a-fd1618adce09" class="">✔️ No external tool</p><p id="2ba85dd4-d74e-81ae-a9d6-f7b1e4e72c11" class="">🔗 <em>Quick tutorial (MDN fetch)</em>:</p><p id="2ba85dd4-d74e-8117-9a43-c3c2af02a98a" class="">https://developer.mozilla.org/fr/docs/Web/API/fetch_api/Using_Fetch</p><hr id="2ba85dd4-d74e-8190-845a-f82bdf53d5bc"/><h3 id="2ba85dd4-d74e-81b1-a8d0-f6d1bcb82b01" class="">5.2 - Mocking an API with tools</h3><p id="2ba85dd4-d74e-817e-b187-ff4bed900891" class=""><strong>Postman Mock Server </strong></p><p id="2ba85dd4-d74e-8140-8c27-d0999502170e" class="">Online mock, accessible by the whole team.</p><p id="2ba85dd4-d74e-8103-adbf-ce09a3dba919" class="">Steps: Collection → Examples → Create Mock Server</p><p id="2ba85dd4-d74e-8101-93bc-faff60c961f7" class="">🔗 Documentation:</p><p id="2ba85dd4-d74e-81c7-a5e1-d5c4b1de3f58" class=""><a href="https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/">https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/</a></p><hr id="2ba85dd4-d74e-8134-a305-c241c390737e"/><p id="2ba85dd4-d74e-8169-bfaa-e610f33203ae" class=""><strong>Mockoon</strong></p><p id="2ba85dd4-d74e-81bb-883c-ebef499f93eb" class="">Desktop application to create a local mock very easily.</p><p id="2ba85dd4-d74e-817c-b94a-d5f820cdaa0b" class="">🔗 Download :</p><p id="2ba85dd4-d74e-819c-8de1-edb161fa27d4" class=""><a href="https://mockoon.com/download/">https://mockoon.com/download/</a></p><p id="2ba85dd4-d74e-81b6-899c-f6292f4170d2" class="">🔗 Beginner&#x27;s guide :</p><p id="2ba85dd4-d74e-816e-81a1-e838ab33acb6" class=""><a href="https://mockoon.com/tutorials/getting-started/">https://mockoon.com/tutorials/getting-started/</a></p><hr id="2ba85dd4-d74e-8180-af26-f66c21c2e8fe"/><p id="2ba85dd4-d74e-8125-9168-ce43c37688fa" class=""><strong>JSON Server </strong></p><p id="2ba85dd4-d74e-8149-b91c-fe16225327f2" class="">Complete REST API in 30 seconds.</p><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="2ba85dd4-d74e-811b-ad69-d011d464f217" class="code code-wrap"><code class="language-Bash" style="white-space:pre-wrap;word-break:break-all">npm install -g json-server
+json-server --watch db.json --port 3000
+
+</code></pre><p id="2ba85dd4-d74e-8126-a199-eeffea9e8426" class="">🔗 Documentation :</p><p id="2ba85dd4-d74e-81b5-a6bf-ea6042b083cb" class=""><a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></p><h3 id="2ba85dd4-d74e-81d0-b16c-f9e27f564524" class="">5.3 - Essential rule</h3><p id="2ba85dd4-d74e-8152-bef2-c9d6e5e582ef" class="">Respect EXACTLY the endpoints and signatures provided in the Wallet Management Kit.</p><ul id="2ba85dd4-d74e-811e-8293-ebd7cf38270f" class="bulleted-list"><li style="list-style-type:disc">Same URL</li></ul><ul id="2ba85dd4-d74e-8105-b021-e3e05482a9aa" class="bulleted-list"><li style="list-style-type:disc">Same method (GET/POST/etc.)</li></ul><ul id="2ba85dd4-d74e-81d4-99d7-f1f54861e852" class="bulleted-list"><li style="list-style-type:disc">Same JSON structure</li></ul><ul id="2ba85dd4-d74e-81d3-8660-fd83693b1ce0" class="bulleted-list"><li style="list-style-type:disc">Same parameters</li></ul><p id="2ba85dd4-d74e-8112-9ef2-ffab9ab803b9" class="">Otherwise, your integration won&#x27;t work once plugged into the real API.</p><p id="2ba85dd4-d74e-81fe-9374-f565b6cce42d" class=""><strong>PS:</strong> You can extend the Wallet Management Kit as long as the official endpoints remain unchanged.</p><p id="2ba85dd4-d74e-814d-88ba-ce2e2e366f79" class="">
+</p><p id="2ba85dd4-d74e-81de-b6eb-ecb095be5d6d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
